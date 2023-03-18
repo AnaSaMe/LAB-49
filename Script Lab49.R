@@ -1,0 +1,97 @@
+#-------------------LABORATORIO 49
+# Hecho con gusto por Carla Carolina Pérez Hernández (UAEH)
+#V5
+#---------------Alumna: Ana Grisel Sanjuan Merida--------------
+# LABORATORIO - Gráficos en R con ggplot2 para Ciencia de Datos
+# Boxplot en R (diagrama de cajas y vigotes)
+
+
+#Instalar paquete con los datos
+install.packages("gapminder")
+install.packages("ggplot2")
+
+#Cargar libreria ggplot2 y gapminder
+library(ggplot2)
+library(gapminder)
+
+#Cargar datos a entorno
+data("gapminder")
+
+#Filtrando por año 2007
+gapminder2007 <- gapminder[gapminder$year == '2007', ]
+
+#Boxplot en ggplot2
+#Los datos se extraen de gapminder2007
+#Se mapean agregando elementos estéticos
+#El eje de las Y estará dado por la expectativa de vida
+#Se agrega capa de geometría (tipo de gráfico)
+ggplot(data = gapminder2007,
+       mapping = aes(y = lifeExp)) +
+  geom_boxplot()
+
+
+#Boxplot diversas variables ggplot2
+#Los datos se extraen de gapminder2007
+#Se mapean agregando elementos estéticos
+#El eje de las X estará dado por los continentes
+#El eje de las Y estará dado por la expectativa de vida
+#Se agrega capa de geometría (tipo de gráfico)
+ggplot(data = gapminder2007,
+       mapping = aes(x = continent,
+         y = lifeExp)) +
+  geom_boxplot()
+
+#Marcando datos atipicos
+#Del gráfico anterior se añaden elementos
+#Resaltar outlier de color rojo
+#Sombreado (shape) de 8
+#Tamaño 4
+ggplot(data = gapminder2007,
+       mapping = aes(x = continent,
+                     y = lifeExp)) +
+  geom_boxplot(outlier.colour = "red",
+               outlier.shape = 8,
+               outlier.size = 4)
+
+#Marcando datos atipicos (vertical)
+#Utilizando gráfica anterior
+#Agregar capa coord_flip para colocarlo en vertical
+ggplot(data = gapminder2007,
+       mapping = aes(x = continent,
+                     y = lifeExp)) +
+  geom_boxplot(outlier.colour = "red",
+               outlier.shape = 8,
+               outlier.size = 4) +
+  coord_flip()
+
+#Marcando datos atipicos y observaciones
+#Los datos se extraen de gapminder2007
+#Se mapean agregando elementos estéticos
+#El eje de las X estará dado por los continentes
+#El eje de las Y estará dado por la expectativa de vida
+#Se agrega capa de geometría (tipo de gráfico)
+#Se agrega otra capa que muestre las observaciones de cada continente
+#Se agrega sombre de tamaño 16
+#La posición que sea de 0.2
+ggplot(data = gapminder2007,
+       mapping = aes(x = continent,
+                     y = lifeExp)) +
+  geom_boxplot() +
+  geom_jitter(shape = 16,
+              position = position_jitter(0.2))
+
+
+#Cambiando color de cajas
+#Los datos se extraen de gapminder2007
+#Se mapean agregando elementos estéticos
+#El eje de las X estará dado por los continentes
+#El eje de las Y estará dado por la expectativa de vida
+#Se agrega capa de geometría (tipo de gráfico)
+#El llenado será con respecto a los continentes
+ggplot(data = gapminder2007,
+       mapping = aes(x = continent,
+                     y = lifeExp,
+                     fill = continent)) +
+  geom_boxplot()
+
+#--------------FIN LABORATORIO 49------------------------
